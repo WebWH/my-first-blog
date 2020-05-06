@@ -2,7 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
-
+# Post는 모델의 이름
+# models은 Post가 장고 모델임을 의미합니다. 이 코드 때문에 장고는 Post가 데이터베이스에 저장되어야 한다고 알게 됩니다.
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)

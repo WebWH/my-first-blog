@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
+    path('', include('blog.urls')), # 127.0.0.1:8080 접속 시 C:\django\blog\urls.py 찾아간 다음 path('', views.post_list, name='post_list'), 에 의해 post_list.html 응답
 ]

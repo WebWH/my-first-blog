@@ -7,6 +7,8 @@
                 <p>published: {{ post.published_date }}</p>
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <!-- C:\django\blog\urls.py 에 pk를 인자로 name='post_detail'인 path를 찾아 이동
+                path('post/<int:pk>/', views.post_detail, name='post_detail') -->
             <p>{{ post.text|linebreaksbr }}</p>
         </div>
     {% endfor %}
