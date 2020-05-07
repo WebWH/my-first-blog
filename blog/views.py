@@ -21,24 +21,26 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post})
     # C:\django\blog\templates\blog\post_detail.html
 
+# 새 글 작성
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
+        form = PostForm(request.POST) # 폼에서 사용자 입력값 가져와서(POST method)
+        if form.is_valid(): # 입력값 검증을 함
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
+            post.save() # 입력값 저장
+            return redirect('post_detail', pk=post.pk) # 상세보기로 화면 전환
     else:
-        form = PostForm()
+        form = PostForm() # forms.py PostForm class
     return render(request, 'blog/post_edit.html', {'form': form})
 
+# 글 수정
 def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk) # Post 모델 인스턴스 가져오기(pk로 SELECT)
+    post = get_object_or_404(Post, pk=pk) # Post 모델 인스턴스 가져오기(pk로 SELECT), 수정을 위해 form에 다시 뿌릴것이기 때문
     if request.method == "POST":
-        form = PostForm(instance=post)
-        if form.is_valid():
+        form = PostForm(request.POST, instance=post) # 기존 글 내용 Post Model에서 가져오기
+        if form.is_valid(): # 입력값 검증
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
