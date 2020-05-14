@@ -1,56 +1,86 @@
-h1 a { /* h1 a 를 CSS Selector라고 함, <h1><a href="">link</a></h1> 의 컬러 지정 */
-    color: #FCA205;
-    font-family : 'Lobster';
-}
+/*
+a, h1, body, class(요소 그룹), id(특정 요소) 속성으로 요소 식별
 
-body {
-    padding-left: 15px;
-}
+ex) 태그 이름은 a, 클래스는 external_link 또는 ID는 link_to_wiki_page로 사용하여 태그를 통해 요소를 식별
+    <a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">
 
-/* . : class Selector */
+ex) class="page-header" -> <p> -> <a> 
+    .page-header p a {}
+
+    . : class Selector
+*/
+
+/* 대문 */
 .page-header {
-    background-color: #ff9400;
+    background-color: #92efb3;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
-
+/* 대문 제목 */
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
     font-size: 36pt;
     text-decoration: none;
+    font-family: 'Lobster', cursive;
+}
+/* 대문 메뉴(글 등록 버튼) */
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 39pt;
+    margin-right: 20px;
 }
 
-.content {
-    margin-left: 40px;
+
+
+
+/* 대문 아래 */
+body {
+    padding-left: 15px;
 }
 
+
+/* 리스트 post_list.html 제목 */
+.post h1 a, .post h1 a:visited {
+    font-family: 'Lobster', cursive;
+    color: #000000;
+}
+/* 리스트 post_list.html 날짜 */
+.date {
+    color: #828282;
+}
+/* 리스트 post_list.html 컨텐츠 */
+.listcontent p a {
+    color: #000000;
+}
+.listcontent p a:active{ /* 클릭할 때 */
+    color: #000000;
+}
+.listcontent p a:visited{ /* 뭔지 모르겠다 */
+    color: #e61021;
+}
+
+/* 제목 */
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
 
-.date {
-    color: #828282;
-}
 
+/* 수정 폼 post_edit.html 좌 공백*/
+.content {
+    margin-left: 40px;
+}
+/* 수정 폼 post_edit.html 저장 버튼 */
 .save {
     float: right;
 }
-
+/* 수정 폼 post_edit.html 폼 필드 */
 .post-form textarea, .post-form input {
     width: 100%;
 }
 
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
-}
-
+/* 상세보기 post_detail.html */
 .post {
     margin-bottom: 70px;
 }
 
-.post h1 a, .post h1 a:visited {
-    color: #000000;
-}

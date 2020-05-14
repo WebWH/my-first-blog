@@ -3,13 +3,22 @@
 {% block content %}
     {% for post in posts %}
         <div class="post">
-            <div class="date">
-                <p>published: {{ post.published_date }}</p>
-            </div>
+            
+            <!-- 상세보기 이동 -->
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <!-- C:\django\blog\urls.py 에 pk를 인자로 name='post_detail'인 path를 찾아 이동
                 path('post/<int:pk>/', views.post_detail, name='post_detail') -->
-            <p>{{ post.text|linebreaksbr }}</p>
+
+            <div class="date">
+                <p>{{ post.published_date | date:"Y-m-d D H:i:s" }}</p>
+                <!--  -->
+            </div>
+
+            <div class="listcontent">
+                <p><a href="{% url 'post_detail' pk=post.pk %}">{{ post.text|linebreaksbr }}</a></p>
+                <!-- |linebreaksbr : \n -> <br> -->
+            </div>
+
         </div>
     {% endfor %}
 {% endblock %}

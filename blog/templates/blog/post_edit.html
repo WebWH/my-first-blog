@@ -2,8 +2,15 @@
 
 {% block content %}
     <h1>New post</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+
+        {{ form.as_p }} <!-- 폼을 <p> HTML 태그를 사용하여 랜더링 -->
+
+        <!-- 저장 버튼 -->
+        <button type="submit" class="save btn btn-default">저장</button>
+        <!-- submit 하면 render 해준 함수로 request -->
+        <!-- form 태그에 action을 비워 놓았는데, 이렇게 하면 form 데이터가 현재 URL페이지로 다시 POST 된다 https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/Forms-->
+
     </form>
 {% endblock %}

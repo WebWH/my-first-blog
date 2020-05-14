@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <h1>임시저장한 글</h1>
+    <div style="height: 100px;"></div>
+
+    {% for post in posts %}
+        <div class="post">
+            <p class="date">임시저장 일자: {{ post.created_date|date:"Y-m-d D H:i:s" }}</p> <!-- | date:"Y-m-d D H:i:s" -->
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|truncatechars:200 }}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}
