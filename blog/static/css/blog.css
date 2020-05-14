@@ -56,8 +56,8 @@ body {
 .listcontent p a:active{ /* 클릭할 때 */
     color: #000000;
 }
-.listcontent p a:visited{ /* 뭔지 모르겠다 */
-    color: #e61021;
+.listcontent p a:visited{ /* 처음 방문했을 때 ? */
+    color: #000000;
 }
 
 /* 제목 */
