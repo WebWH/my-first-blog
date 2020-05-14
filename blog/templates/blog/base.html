@@ -19,8 +19,16 @@
                 <!-- 글 등록 버튼 + -->
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
                 <!-- path('post/new', views.post_new, name='post_new'), -->
+
+                <!-- 로그인 중 표시 -->
+                <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+            {% else %}
+                <!-- 로그인 버튼 -->
+                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
             {% endif %}
-            <h1><a href="/">WebWH Blog</a></h1>
+
+            <h1><a href="/">WebWH Blog</a></h1> <!-- 제목 -->
+
         </div>
         <!-- END 대문 -->
 

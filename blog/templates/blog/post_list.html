@@ -19,6 +19,9 @@
                 <!-- |linebreaksbr : \n -> <br> -->
             </div>
 
+            <!-- 승인된 댓글 수 -->
+            <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+
         </div>
     {% endfor %}
 {% endblock %}

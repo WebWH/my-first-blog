@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.utils import timezone # 쿼리셋 정렬에 사용
-from .models import Post # 추가하여 models.py 에 정의된 model 가져오기
+from .models import Post, Comment # 추가하여 models.py 에 정의된 model 가져오기
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required # 외부인 로그인 글 작성 허가
+# 함수 위에 decorator(@login_required) 추가하여 로그인 사용자만 사용할 수 있도록 함
 
 # urls.py 에서 views.py 참조하여 render할 화면 찾음
 
@@ -23,6 +25,7 @@ def post_detail(request, pk):
 
 
 # 새 글 작성
+@login_required
 def post_new(request):
     print("post_new Call !!!!!!")    
     
@@ -44,6 +47,7 @@ def post_new(request):
 
 
 # 글 수정
+@login_required
 def post_edit(request, pk):
     print("post_edit222222222222222222 Call !!!!!!")        
     post = get_object_or_404(Post, pk=pk) # Post 모델 인스턴스 가져오기(pk로 SELECT), 수정을 위해 form에 다시 뿌릴것이기 때문
@@ -62,12 +66,14 @@ def post_edit(request, pk):
 
 
 # 임시 저장
+@login_required
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
 
 # 게시
+@login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
@@ -75,8 +81,39 @@ def post_publish(request, pk):
 
 
 # 글 삭제
+@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
 
+
+# 댓글 쓰기
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+
+
+# 댓글 승인
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('post_detail', pk=comment.post.pk)
+
+# 댓글 삭제
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('post_detail', pk=comment.post.pk)

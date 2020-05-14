@@ -13,4 +13,7 @@ urlpatterns = [
     url(r'^drafts/$', views.post_draft_list, name='post_draft_list'), # 임시저장
     url(r'^post/(?P<pk>\d+)/publish/$', views.post_publish, name='post_publish'), # 글 게시
     url(r'^post/(?P<pk>\d+)/remove/$', views.post_remove, name='post_remove'), # 글 삭제
+    url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'), # 댓글 쓰기
+    url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
+    url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
 ]
