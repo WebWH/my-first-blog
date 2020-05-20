@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls), # 사용자 로그인
     # url(r'^accounts/login/$', views.login, name='login'), # 사용자 로그인
     # url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}), # 로그아웃
-    url(r'^login/$', views.LoginView.as_view(template_name='accounts/login_form.html'), name='login'),
+    url(r'^login/$', views.LoginView.as_view(template_name='accounts/login_form.html'), name='login'), # 로그인
     url(r'^accounts/logout/$', views.LogoutView, name='logout', kwargs={'next_page': '/'}), # 로그아웃
     url(r'', include('blog.urls')), # 사용자 로그인
 ]
