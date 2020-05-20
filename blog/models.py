@@ -29,7 +29,8 @@ class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    # created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(auto_now_add=True) # 해당 레코드 생성시 현재 시간 자동저장
     approved_comment = models.BooleanField(default=True) # true=> 승인없이 댓글 작성, false=> 댓글 승인 필요
 
     def approve(self):
