@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('blog.urls')), # 127.0.0.1:8080 접속 시 C:\django\blog\urls.py 찾아간 다음 path('', views.post_list, name='post_list'), 에 의해 post_list.html 응답
     url(r'^admin/', admin.site.urls), # 사용자 로그인
     # url(r'^accounts/login/$', views.login, name='login'), # 사용자 로그인
+    # url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}), # 로그아웃
     url(r'^login/$', views.LoginView.as_view(template_name='accounts/login_form.html'), name='login'),
-    url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}), # 로그아웃
+    url(r'^accounts/logout/$', views.LogoutView, name='logout', kwargs={'next_page': '/'}), # 로그아웃
     url(r'', include('blog.urls')), # 사용자 로그인
 ]
