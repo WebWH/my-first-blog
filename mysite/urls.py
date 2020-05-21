@@ -23,14 +23,12 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', include('blog.urls')), # 127.0.0.1:8080 접속 시 C:\django\blog\urls.py 찾아간 다음 path('', views.post_list, name='post_list'), 에 의해 post_list.html 응답
-    url(r'^admin/', admin.site.urls), # 사용자 로그인
+    # url(r'^admin/', admin.site.urls), # 사용자 로그인
     # url(r'^accounts/login/$', views.login, name='login'), # 사용자 로그인
     # url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}), # 로그아웃
-  
-#     path('accounts/', include('django.contrib.auth.urls')),  
 
     url(r'^login/$', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'), # 로그인
-    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}), # 로그아웃
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout'), # 로그아웃 setting.py logout redirect / 
 
     url(r'', include('blog.urls')), # 사용자 로그인
 ]
