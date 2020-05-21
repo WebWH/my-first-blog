@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from django.contrib.auth import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
@@ -26,10 +26,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls), # 사용자 로그인
     # url(r'^accounts/login/$', views.login, name='login'), # 사용자 로그인
     # url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}), # 로그아웃
-    # url(r'^login/$', views.LoginView.as_view(template_name='accounts/login_form.html'), name='login'), # 로그인
+  
+#     path('accounts/', include('django.contrib.auth.urls')),  
 
-    url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'), # 로그인
-    
-    url(r'^accounts/logout/$', views.LogoutView, name='logout', kwargs={'next_page': '/'}), # 로그아웃
+    url(r'^login/$', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'), # 로그인
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}), # 로그아웃
+
     url(r'', include('blog.urls')), # 사용자 로그인
 ]

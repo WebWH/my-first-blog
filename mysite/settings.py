@@ -25,7 +25,7 @@ LOGIN_REDIRECT_URL = '/'
 SECRET_KEY = 'z@oaj$0mdmlrsvhlc&kz=_@1z3*q&_^zz_#1r4rljm$*ho+opb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
